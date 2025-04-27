@@ -23,6 +23,9 @@ namespace CICD_Demo_WebApplication
                 app.UseSwaggerUI();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
