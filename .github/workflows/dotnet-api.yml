@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted #windows-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
@@ -18,7 +18,7 @@ jobs:
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x'
+        dotnet-version: '8.0.x' # Match your project's version
 
     - name: Restore dependencies
       run: dotnet restore
@@ -37,20 +37,3 @@ jobs:
       with:
         name: published-api
         path: ./publish
-
-    - name: Deploy to Local IIS
-      run: |
-        $iisPath = "C:\inetpub\wwwroot\CICD_Demo_WebApplication"
-        $publishPath = "$(System.DefaultWorkingDirectory)/publish"
-
-        Write-Host "Cleaning existing files in IIS path..."
-        if (Test-Path $iisPath) {
-          Remove-Item "$iisPath\*" -Recurse -Force
-        }
-
-        Write-Host "Copying new published files..."
-        Copy-Item "$publishPath\*" $iisPath -Recurse
-
-        Write-Host "Restarting IIS..."
-        iisreset
-      shell: pwsh
