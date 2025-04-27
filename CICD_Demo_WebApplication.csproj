@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include=".github\" />
+    <None Include=".github\workflows\dotnet-api.yml" />
   </ItemGroup>
 
 </Project>
